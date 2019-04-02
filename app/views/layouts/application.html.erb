@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BookTrail</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,7 +10,13 @@
   </head>
 
   <body>
-    <%= yield %>
-    さ
+    <div class="header-logo">
+      BookTrail
+    </div>
+    <ul class="header-menus">
+      <li>BookTrailとは</li>
+    </ul>
+
+  <%= yield %>
   </body>
 </html>
