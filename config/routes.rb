@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   
-  get 'posts/index'
+  #home_controller
   get "/top"  => "home#top"
   get "/about" => "home#about"
+
+  #posts_controller
+  get "/posts/new" => "posts#new" 
   get "/posts/index" => "posts#index"
-  
-  #詳細ページに遷移
   get "/posts/:id/show" => "posts#show"
 
+  #root
   get "/" => "home#top"
 
 end

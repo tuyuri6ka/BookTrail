@@ -5,8 +5,8 @@
         <div class="posts-index-item">
         <table>
             <tr>
-            <td><%= post.title %></td>
-            <td><%= post.author %></td>
+            <td><%= link_to(post.title,"/posts/#{post.id}/show") %></td>
+            <td><%= link_to(post.author,"/posts/#{post.id}/show") %></td>
             </tr>
         </table>
         </div>
