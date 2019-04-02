@@ -10,12 +10,17 @@
   </head>
 
   <body>
-    <div class="header-logo">
-      BookTrail
-    </div>
-    <ul class="header-menus">
-      <li>BookTrailとは</li>
-    </ul>
+
+    <header>
+      <div class="header-logo">
+        <%= link_to("BookTrail","/top") %>
+      </div>
+      <ul class="header-menus">
+        <li>
+          <%= link_to("BookTrailとは","/about") %>
+        </li>
+      </ul>
+    </header>
 
   <%= yield %>
   </body>
