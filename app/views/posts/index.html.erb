@@ -1,0 +1,17 @@
+<div class="main posts-index">
+    <div class="container">
+ 
+        <% @posts.each do |post| %>
+        <div class="posts-index-item">
+        <table>
+            <tr>
+            <td><%= link_to(post.title,"/posts/#{post.id}/show") %></td>
+            <td><%= link_to(post.author,"/posts/#{post.id}/show") %></td>
+            </tr>
+        </table>
+        </div>
+        <% end %>
+    </div>
+
+    </div>
+</div>
