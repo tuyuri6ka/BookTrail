@@ -5,15 +5,20 @@
     <div class="form">
         <div class="form-body">
 
+            <!-- 入力エラー時にメッセージを表示する -->
+            <% @post.errors.full_messages.each do |error| %>
+              <%= error %>  
+            <% end %>
+
             <%= form_tag("/posts/create") do %>
                 <p>書籍名</p>
-                <input name="title" value="title">
+                <input name="title" value="<%= @post.title %>">
                 <p>著者名</p>
-                <input name="author" value="author">
+                <input name="author" value="<%= @post.author %>">
                 <p>ページ数</p>
-                <input name="page" value="page">
+                <input name="page" value="<%= @post.page %>">
                 <p>出版年</p>
-                <input name="publish_data" value="publish_data">
+                <input name="publish_data" value="<%= @post.publish_data %>">
 
                 <input type="submit" value="登録">
             <% end %>

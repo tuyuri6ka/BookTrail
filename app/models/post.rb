@@ -1,2 +1,6 @@
 class Post < ApplicationRecord
+
+    validates :title,{presence: true, length:{maximum: 140}}    #最大文字数は特に意味はないが設定
+    validates :author,{presence: true}                          #著者で参考リンクを飛ばせると嬉しい。
+
 end
