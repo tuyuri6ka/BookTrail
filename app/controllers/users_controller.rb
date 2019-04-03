@@ -35,10 +35,16 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    @user.name = params[:name]
-    @user.name = params[:email]
-    @user.name = params[:name]
 
+    @user.name = params[:name]
+    @user.email = params[:email]
+    @user.password = params[:password]
+    #image.readで画像を抽出し、Flie.binwriter()でpublic内に保存
+    if image = params[:image]
+      @user.image_name= "#{@user.id}.jpg"
+      File.binwriter("public/user_images/#{@user.image_name}",image.read)
+    end
+      
     if @user.save
       flash[:notice] = "ユーザー情報を編集しました"
       redirect_to("/users/#{@user.id}")
