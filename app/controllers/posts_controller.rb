@@ -22,9 +22,9 @@ class PostsController < ApplicationController
     #post.save時にvalidatesにより、True/Falseの評価
     if @post.save
       flash[:notice]="書籍を追加しました"
-      redirect_to("/posts/index")   #user/#{:id}/showに飛びたい。またはここを個人管理スペースにする。
+      redirect_to("/posts/index")                       #user/#{:id}/showに飛びたい。またはここを個人管理スペースにする。
     else
-      flash[:notice]="入力内容に誤りがあります"
+      flash.now[:notice]="入力内容に誤りがあります"       #flash.nowはアクションが進まないときに利用
       render("/posts/new")
     end
   end
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
       flash[:notice]="登録内容を変更しました"
       redirect_to("/posts/index")
     else
-      flash[:notice]="変更内容に誤りがあります"
+      flash.now[:notice]="変更内容に誤りがあります"       #flash.nowはアクションが進まないときに利用
       render("/posts/edit")
     end
   end
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
 
     @post.destroy
-    flash[:notice]="登録内容を削除しました"
+    flash.now[:notice]="登録内容を削除しました"
     redirect_to("/posts/index")
   end
 
