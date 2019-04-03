@@ -26,13 +26,23 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
   end
 
-  def destroy
+  def update
+    @post = Post.find_by(id: params[:id])
+    
+    #下はまとめて代入できそう。
+    @post.title = params[:title]
+    @post.author = params[:author]
+    @post.page = params[:page]
+    @post.publish_data = params[:publish_data]
 
+    @post.save
+    redirect_to("/posts/index")
   end
 
-  def update
-    @post = Post.find_by(id: params[:id]) #:idを仮置き
-    @post.save
+  def destroy
+    @post = Post.find_by(id: params[:id])
+
+    @post.destroy
     redirect_to("/posts/index")
   end
 
