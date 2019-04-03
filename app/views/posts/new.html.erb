@@ -6,9 +6,11 @@
         <div class="form-body">
 
             <!-- 入力エラー時にメッセージを表示する -->
-            <% @post.errors.full_messages.each do |error| %>
-              <%= error %>  
-            <% end %>
+            <ul class:posts-errors-list>
+              <% @post.errors.full_messages.each do |error| %>
+                  <li><%= error %></li>
+              <% end %>
+            </ul>
 
             <%= form_tag("/posts/create") do %>
                 <p>書籍名</p>

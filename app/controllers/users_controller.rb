@@ -7,24 +7,27 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new(
-      name: params[:name]
-      email:params[:email]
-      password:params[:password]
-    )
-
-    if @user.save
-      flash[:notice]="ようこそ"
-      redirect_to("/")
-    else
-      flash[:notice]="入力内容に誤りがあります"
-      render("/users/new")
+    @user = User.new
   end
 
   def edit
   end
 
   def create
+    @user = User.new(
+      name: params[:name],
+      email:params[:email],
+      password:params[:password]
+    )
+
+    if @user.save
+      flash[:notice]="ようこそ"
+      redirect_to("/users/show")
+    else
+      flash.now[:notice]="入力内容に誤りがあります"
+      render("/users/new")
+    end
+
   end
 
   def update
