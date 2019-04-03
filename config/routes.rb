@@ -9,18 +9,18 @@ Rails.application.routes.draw do
   get "users/new" => "users#new"
   post "users/create" => "users#new"
   post "users/:id/edit" => "users#edit"
-  get "users/:id/show" => "users#show"
   post "users/:id/update" => "users#update"
   post "users/:id/destroy" => "users#destroy"
+  get "users/:id" => "user#show"
 
   #posts_controller
   get "/posts/index" => "posts#index"
   get "/posts/new" => "posts#new" 
   post "/posts/create" => "posts#create"
   get "/posts/:id/edit" => "posts#edit"
-  get "/posts/:id/show" => "posts#show"
   post "/posts/:id/update" => "posts#update"
   post "/posts/:id/destroy" => "posts#destroy"
+  get "/posts/:id" => "posts#show"
 
   #root
   get "/" => "home#top"
