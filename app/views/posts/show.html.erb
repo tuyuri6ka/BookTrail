@@ -9,6 +9,16 @@
         <div class="post-time">
         <%= @post.created_at %>    
         </div>
+
+        <!-- [編集]の追加　-->
+        <div class="post-menus">
+            <%= link_to("編集","/posts/#{@post.id}/edit") %>
+
+        <!-- [削除]の追加　-->
+            <%= link_to("削除","/posts/#{@post.id}/destroy", {method:"post"}) %>
+        </div>
+
+
     </div>
   </div>
 </div>
