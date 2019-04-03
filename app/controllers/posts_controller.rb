@@ -18,7 +18,7 @@ class PostsController < ApplicationController
       publish_data: params[:publish_data]
     )
     @post.save
-    redirect_to("/posts/index")   #user/#{:id}/showに飛びたい。またはここを個人スペースにする。
+    redirect_to("/posts/index")   #user/#{:id}/showに飛びたい。またはここを個人管理スペースにする。
 
   end
 
