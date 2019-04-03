@@ -6,7 +6,7 @@
         <div class="form-body">
 
             <!-- 入力エラー時にメッセージを表示する -->
-            <ul class:posts-errors-list>
+            <ul class="posts-errors-list">
               <% @post.errors.full_messages.each do |error| %>
                   <li><%= error %></li>
               <% end %>
