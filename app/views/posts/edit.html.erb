@@ -9,7 +9,7 @@
             <% @post.errors.full_messages.each do |error| %>
             <%= error %>  
             <% end %>
-            
+
             <%= form_tag("/posts/#{@post.id}/update") do %>
                 <p>書籍名</p>
                 <input name="title" value="<%= @post.title %>">
