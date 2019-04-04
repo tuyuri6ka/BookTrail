@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   #before_action----------------------------------------------
 
   #非ログイン時のアクセス制限
-  before_action :authenticate_user{only: [:index,:show,:edit,:update]}
+  before_action :authenticate_user,{only: [:index,:show,:edit,:update]}
   #ログイン時のアクセス制限
   before_action :forbid_login_user,{only: [:new,:create,:login_form,:login]}
   #他ユーザーに対する編集制限
@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     if @current_user.id != params[:id].to_i
       flash[:notice]="権限がありません"
       redirect_to("/posts/index")
+    end
   end
 
   #users-----------------------------------------
@@ -57,11 +58,10 @@ class UsersController < ApplicationController
     #値を格納
     @user.name = params[:name]
     @user.email = params[:email]
-    @user.password = params[:password]
     #image.readで画像を抽出し、Flie.binwriter()でpublic内に保存
     if image = params[:image]
       @user.image_name= "#{@user.id}.jpg"
-      File.binwriter("public/user_images/#{@user.image_name}",image.read)
+      File.binwrite("public/user_images/#{@user.image_name}",image.read)
     end
       
     if @user.save

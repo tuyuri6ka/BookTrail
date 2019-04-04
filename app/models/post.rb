@@ -6,5 +6,6 @@ class Post < ApplicationRecord
     #@post.userにより、postした投稿のuser情報を取得するメソッド
     def user
         return User.find_by(id: self.user_id)
+    end
 
 end
