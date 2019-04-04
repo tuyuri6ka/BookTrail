@@ -1,4 +1,16 @@
 class PostsController < ApplicationController
+
+  before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
+
+　#アクセス制限
+　def ensure_correct_user
+    @post = Post.find_by(id: params[:id])
+    if @post.user.id != @currernt_user.id
+      flash[:notice]= "権限がありません"
+      return_to("/posts/index")
+    end
+  end
+
   def index
     @posts= Post.all.order(created_at: :desc)
   end
