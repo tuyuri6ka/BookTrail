@@ -13,38 +13,37 @@
 
     <header>
       <div class="header-logo">
-        <%= link_to("BookTrail","/top") %>
+        <%= link_to("BookTrail","/") %>
       </div>
       <ul class="header-menus">
 
         <% if session[:user_id] %>
-        <li>
-          <%= session[:user_id] %>
-        </li>
-        <% end %>
-
-        <li>
+          <li>
+            現在ログインしているユーザー：id<%= session[:user_id] %>
+          </li>
+          <li>
+          <%= link_to("投稿一覧","/posts/index") %>
+          </li>
+          <li>
+          <%= link_to("新規投稿","/posts/new") %>
+          </li>
+          <li>
+          <%= link_to("ユーザー一覧","/users/index") %>
+          </li>
+          <li>
+          <%= link_to("ログアウト","/logout") %>
+          </li>
+        <% else %>
+          <li>
           <%= link_to("BookTrailとは","/about") %>
-        </li>
-        <li>
-        <%= link_to("投稿一覧","/posts/index") %>
-        </li>
-        <li>
-        <%= link_to("ユーザー一覧","/users/index") %>
-        </li>
-        <li>
-        <%= link_to("新規投稿","/posts/new") %>
-        </li>
-        <li>
-        <%= link_to("新規登録","/users/new") %>
-        </li>
-        <li>
-        <%= link_to("ログイン","/login") %>
-        </li>
-        <li>
-        <%= link_to("ログアウト","/logout") %>
-        </li>
-
+          </li>
+          <li>
+          <%= link_to("新規登録","/users/new") %>
+          </li>
+          <li>
+          <%= link_to("ログイン","/login") %>
+          </li>
+        <% end %>
       </ul>
     </header>
 
