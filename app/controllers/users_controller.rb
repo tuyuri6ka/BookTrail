@@ -35,7 +35,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-
+    
+    #値を格納
     @user.name = params[:name]
     @user.email = params[:email]
     @user.password = params[:password]
@@ -56,4 +57,31 @@ class UsersController < ApplicationController
 
   def destroy
   end
+
+  def login_form
+    @user = User.new
+  end
+
+  def login
+    @user = User.find_by(email: params[:email], password:params[:password])
+    
+    if @user
+      session[:user_id] = @user.id
+      flash[:notice] ="ようこそ"
+      redirect_to("/users/#{@user.id}")
+    else
+      #入力ミスの場合は、フォーム再表示に利用するため、値を格納（@userはnilのため@emailなどをそのまま利用）
+      @email = params[:email]
+      @password = params[:password]
+      @error_message="アドレスまたはパスワードが間違っています"
+      flash.now[:notice] = "入力内容に誤りがあります"
+      render("/users/login_form")
+    end
+  end
+
+  def logout
+    session[:user_id] = nil
+    redirect_to("/login")
+  end
+ 
 end

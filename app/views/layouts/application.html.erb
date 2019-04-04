@@ -16,6 +16,13 @@
         <%= link_to("BookTrail","/top") %>
       </div>
       <ul class="header-menus">
+
+        <% if session[:user_id] %>
+        <li>
+          <%= session[:user_id] %>
+        </li>
+        <% end %>
+
         <li>
           <%= link_to("BookTrailとは","/about") %>
         </li>
@@ -30,6 +37,12 @@
         </li>
         <li>
         <%= link_to("新規登録","/users/new") %>
+        </li>
+        <li>
+        <%= link_to("ログイン","/login") %>
+        </li>
+        <li>
+        <%= link_to("ログアウト","/logout") %>
         </li>
 
       </ul>
