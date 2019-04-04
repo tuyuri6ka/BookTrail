@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
+    @user = User.find_by(id: @post.user_id) 
   end
 
   def new
@@ -16,7 +17,8 @@ class PostsController < ApplicationController
       title:  params[:title],
       author: params[:author],
       page:   params[:page],
-      publish_data: params[:publish_data]
+      publish_data: params[:publish_data],
+      user_id: @current_user.id
     )
 
     #post.save時にvalidatesにより、True/Falseの評価
