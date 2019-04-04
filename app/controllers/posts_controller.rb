@@ -1,10 +1,23 @@
 class PostsController < ApplicationController
+
+  before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
+
+　#アクセス制限
+　def ensure_correct_user
+    @post = Post.find_by(id: params[:id])
+    if @post.user.id != @currernt_user.id
+      flash[:notice]= "権限がありません"
+      return_to("/posts/index")
+    end
+  end
+
   def index
     @posts= Post.all.order(created_at: :desc)
   end
 
   def show
     @post = Post.find_by(id: params[:id])
+    @user = @post.user 
   end
 
   def new
@@ -16,7 +29,8 @@ class PostsController < ApplicationController
       title:  params[:title],
       author: params[:author],
       page:   params[:page],
-      publish_data: params[:publish_data]
+      publish_data: params[:publish_data],
+      user_id: @current_user.id
     )
 
     #post.save時にvalidatesにより、True/Falseの評価

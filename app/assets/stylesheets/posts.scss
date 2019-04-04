@@ -98,3 +98,35 @@
 .posts-errors-list li{
   color: #e9546b
 }
+
+/* posts/table ================================ */
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table tr{
+  border-bottom: solid 1px #eee;
+  cursor: pointer;
+}
+
+table tr:hover{
+  background-color: #d4f0fd;
+}
+
+table th,table td{
+  text-align: center;
+  width: 25%;
+  padding: 15px 0;
+}
+
+table td.icon{
+  background-size: 70px;
+}
+
+table .icon-image{
+  width: 60px;
+  border-radius: 40%
+}
+

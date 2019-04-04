@@ -1,17 +1,22 @@
+<% provide(:title, "書籍一覧") %>
 <div class="main posts-index">
     <div class="container">
- 
-        <% @posts.each do |post| %>
-        <div class="posts-index-item">
+
         <table>
-            <tr>
-            <td><%= link_to(post.title,"/posts/#{post.id}") %></td>
-            <td><%= link_to(post.author,"/posts/#{post.id}") %></td>
-            </tr>
-        </table>
-        </div>
+        <tr>
+        <th>お名前</th>
+        <th>書籍</th>
+        <th>著者</th>
+        <th>出版社</th>
+        </tr>
+        <% @posts.each do |post| %>
+        <tr>
+        <td><img src="<%= "/user_images/#{post.user.image_name}" %>" class="icon-image"></td>
+        <td><%= link_to(post.title,"/posts/#{post.id}") %></td>
+        <td><%= link_to(post.author,"/posts/#{post.id}") %></td>
+        <td><%= link_to(post.publish_data,"/posts/#{post.id}") %></td>
+        </tr>
         <% end %>
-    </div>
 
     </div>
 </div>
