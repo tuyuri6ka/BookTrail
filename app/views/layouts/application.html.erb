@@ -12,11 +12,15 @@
   <body>
 
     <header>
-      <div class="header-logo">
+      <div class="header-logo">   
+      <% if @current_user %> 
+        <%= link_to("BookTrail","/users/#{@current_user.id}") %>
+      <% else %>
         <%= link_to("BookTrail","/") %>
+      <% end %>
       </div>
-      <ul class="header-menus">
 
+      <ul class="header-menus">
         <% if @current_user %>
           <li>
           <%= link_to(@current_user.name,"/users/#{@current_user.id}") %>
