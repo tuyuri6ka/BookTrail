@@ -2,8 +2,8 @@ class PostsController < ApplicationController
 
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
-　#アクセス制限
-　def ensure_correct_user
+  #アクセス制限
+  def ensure_correct_user
     @post = Post.find_by(id: params[:id])
     if @post.user.id != @currernt_user.id
       flash[:notice]= "権限がありません"
@@ -73,5 +73,4 @@ class PostsController < ApplicationController
     flash.now[:notice]="登録内容を削除しました"
     redirect_to("/posts/index")
   end
-
 end
