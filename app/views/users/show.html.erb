@@ -12,18 +12,25 @@
       <% end %>
     </div>
 
+    <table>
+    <thead>
+        <tr>
+        <th>お名前</th>
+        <th>書籍</th>
+        <th>著者</th>
+        <th>出版社</th>
+        </tr>
+    </thead>
+    <tbody>
     <% @user.posts.each do|post| %>
-    <div class="posts-index-item">
-      <div class="post-left">
-        <img src="<%= "/user_images/#{post.user.image_name}" %>">
-      </div>
-      <div class="post-right">
-        <div class="post-user-name">
-          <%= link_to(post.user.name, "/users/#{post.user.id}") %>
-        </div>
-      <%= link_to(post.title, "/posts/#{post.id}") %>
-      </div>
-    </div>
+      <tr>
+      <td><img src="<%= "/user_images/#{post.user.image_name}" %>" class="icon-image"></td>
+      <td class="tdata"><%= link_to(post.title, "/posts/#{post.id}") %></td>
+      <td class="tdata"><%= link_to(post.author,"/posts/#{post.id}") %></td>
+      <td class="tdata"><%= link_to(post.publish_data,"/posts/#{post.id}") %></td>
+      </tr>
     <% end %>
+    </tbody>
+    </table>
   </div>
 </div>
