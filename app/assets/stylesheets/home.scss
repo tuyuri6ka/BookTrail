@@ -71,16 +71,22 @@
     position:fixed;
     background-color:rgba(117,33,0,0.9);
     opacity:0.8;
+    box-shadow: 0px 2px 4px gray;
   }
   
   .header-logo {
     float: left;
-    padding-left: 20px;
+    padding: 0px 20px;
     color: white;
     font-size: 22px;
     line-height: 64px;
   }
-  
+  .header-logo:hover{
+    background-color:rgba(75, 35, 20, 0.7);
+  }
+  .header-logo:active{
+    background-color:rgba(46, 27, 21, 0.9);
+  }
   .header-logo a{
     color: white;
     font-size: 22px;
@@ -96,7 +102,13 @@
     line-height: 64px;
     font-size: 13px;
     color: white;
-    padding-left: 15px;
+    padding: 0px 10px;
+  }
+  .header-menus li:hover{
+    background-color:rgba(75, 35, 20, 0.7);
+  }
+  .header-menus li:active{
+    background-color:rgba(46, 27, 21, 0.9);
   }
   
   .header-menus a {
@@ -128,7 +140,7 @@
     height: auto;
     min-height: 100%;
     color: white;
-    background-color: #3ecdc6;
+    background-color: rgba(55, 202, 153, 0.9);
     background-repeat: no-repeat;
     background-position: center 50%;
     background-size: cover;
@@ -154,7 +166,8 @@
   /* about ================================ */
   .about-main {
     padding: 180px 8% 0;
-    color: white;
+    color: rgba(117, 117, 117, 1);
+    text-align:center;
   }
   
   .about-main h2 {
@@ -166,6 +179,7 @@
   .about-main p {
     font-weight: 200;
     font-size: 20px;
+    margin-bottom:10px;
   }
   
   .about-img {

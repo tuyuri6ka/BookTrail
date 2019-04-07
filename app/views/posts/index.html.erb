@@ -11,7 +11,7 @@
                 <div class="post-user-name">
                     <%= link_to(post.user.name, "/users/#{post.user.id}") %>
                 </div>
-            <%= link_to(post.title, "/posts/#{post.id}") %>
+            <p>【追加】「<%= link_to(post.title, "/posts/#{post.id}") %>」 著：<%= link_to(post.author, "/posts/#{post.id}") %></p>
             </div>
         </div>
         <% end %>
