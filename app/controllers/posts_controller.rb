@@ -79,9 +79,9 @@ class PostsController < ApplicationController
   end
  
   def find_result
-    @posts = Post.where('title LIKE(?)',"%#{params[:title]}%")
-    #.or(Post.where(publish_data: params[:publish_data])).or(Post.where(author: params[:author]))
+    #自分の書庫欄のあいまい検索機能（記述が長い）
     @user = @current_user
+    @posts = Post.where("title LIKE ? AND author LIKE ? AND publish_data LIKE ?","%#{params[:title]}%","%#{params[:author]}%","%#{params[:publish_data]}%").where(user_id: @current_user.id)
     @table_id = 0
   end
 end
