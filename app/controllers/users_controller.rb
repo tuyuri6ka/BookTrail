@@ -24,6 +24,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    @table_id = 0
   end
 
   def new

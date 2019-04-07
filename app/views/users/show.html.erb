@@ -15,19 +15,22 @@
       <table>
       <thead>
           <tr>
+          <th>id</th>
           <th>書籍</th>
           <th>著者</th>
+          <th>頁数</th>
           <th>出版社</th>
-          <th>ページ数</th>
           </tr>
       </thead>
       <tbody>
       <% @user.posts.each do|post| %>
+      <% @table_id = @table_id + 1 %>
         <tr>
-        <td class="tdata title"><%= link_to(post.title, "/posts/#{post.id}") %></td>
-        <td class="tdata author"><%= link_to(post.author,"/posts/#{post.id}") %></td>
-        <td class="tdata publish-data"><%= link_to(post.publish_data,"/posts/#{post.id}") %></td>
-        <td class="tdata page"><%= link_to(post.page,"/posts/#{post.id}") %></td>
+        <td class="tdata table-id"><%= @table_id %></td>
+        <td class="tdata table-title"><%= link_to(post.title, "/posts/#{post.id}") %></td>
+        <td class="tdata table-author"><%= link_to(post.author,"/posts/#{post.id}") %></td>
+        <td class="tdata table-page"><%= link_to(post.page,"/posts/#{post.id}") %></td>
+        <td class="tdata table-publish-data"><%= link_to(post.publish_data,"/posts/#{post.id}") %></td>
         </tr>
       <% end %>
       </tbody>
