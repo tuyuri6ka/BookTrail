@@ -106,5 +106,5 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     redirect_to("/login")
   end
- 
+
 end
