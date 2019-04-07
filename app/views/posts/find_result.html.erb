@@ -1,4 +1,4 @@
-<% provide(:title, "show") %>
+<% provide(:title, "result") %>
 <div class="main user-show">
   <div class="container-user-show">
     
@@ -33,7 +33,7 @@
           </tr>
       </thead>
       <tbody>
-      <% @user.posts.each do|post| %>
+      <% @posts.each do|post| %>
       <% @table_id = @table_id + 1 %>
         <tr>
         <td class="tdata table-id"><%= @table_id %></td>

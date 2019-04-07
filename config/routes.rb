@@ -11,13 +11,17 @@ Rails.application.routes.draw do
   post "/login" => "users#login"
   get "/logout" => "users#logout"
 
-  post "users/create" => "users#create"
-  get "users/:id/edit" => "users#edit"
-  post "users/:id/update" => "users#update"
-  post "users/:id/destroy" => "users#destroy"
-  get "users/:id" => "users#show"
+  post "/users/create" => "users#create"
+  get "/users/:id/edit" => "users#edit"
+  post "/users/:id/update" => "users#update"
+  post "/users/:id/destroy" => "users#destroy"
+  get "/users/:id" => "users#show"
 
   #posts_controller
+  get "/find" => "posts#find_form"
+  post "/find_result" => "posts#find_result"
+  get "/find_result" => "posts#find_result"
+
   get "/posts/index" => "posts#index"
   get "/posts/new" => "posts#new" 
   post "/posts/create" => "posts#create"

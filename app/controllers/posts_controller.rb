@@ -36,7 +36,7 @@ class PostsController < ApplicationController
     #post.save時にvalidatesにより、True/Falseの評価
     if @post.save
       flash[:notice]="書籍を追加しました"
-      redirect_to("/posts/index")                       #user/#{:id}/showに飛びたい。またはここを個人管理スペースにする。
+      redirect_to("/posts/index")
     else
       flash.now[:notice]="入力内容に誤りがあります"       #flash.nowはアクションが進まないときに利用
       render("/posts/new")
@@ -72,5 +72,16 @@ class PostsController < ApplicationController
     @post.destroy
     flash.now[:notice]="登録内容を削除しました"
     redirect_to("/posts/index")
+  end
+
+  def find_form
+    @post = Post.new
+  end
+ 
+  def find_result
+    @posts = Post.where('title LIKE(?)',"%#{params[:title]}%")
+    #.or(Post.where(publish_data: params[:publish_data])).or(Post.where(author: params[:author]))
+    @user = @current_user
+    @table_id = 0
   end
 end

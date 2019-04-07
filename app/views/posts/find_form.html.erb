@@ -1,0 +1,29 @@
+<!-- ページテンプレートはlogin.form.erbに準拠 -->
+<% provide(:title, "検索") %>
+<div class="main users-new">
+  <div class="container">
+    <div class="form-heading">検索</div>
+    <div class="form users-form">
+      <div class="form-body">
+
+        <!-- 入力ミスがあった場合に、エラーを表示 -->
+        <% if @error_message %>
+            <div class="form-error">
+            <%= @error_message %>
+            </div>
+        <% end %>
+
+        <%= form_tag("/find_result") do %>
+            <p>書籍名</p>
+            <input name ="title" value ="<%= @post.title %>">
+            <p>著者</p>
+            <input name="author" value="<%= @post.author %>">
+            <p>出版社名</p>
+            <input name="publish_data" value="<%= @post.publish_data %>">
+            <input type="submit" value="検索">
+        <% end %>
+
+        </div>
+    </div>
+  </div>
+</div>

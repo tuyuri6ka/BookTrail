@@ -61,14 +61,21 @@
   margin-left: 15px;
 }
 
-.posts-show-item p {
+.post-title {
   font-size: 24px;
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .post-time {
   color: #8899a6;
   margin-bottom: 10px;
+}
+
+.post-author{
+  color:#8899a6;
+  font-size:22px;
+  margin-bottom:20px;
+  text-align:right;
 }
 
 .post-menus {

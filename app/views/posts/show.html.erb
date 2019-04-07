@@ -9,10 +9,10 @@
       </div>
 
         <!-- 書籍名の取得　-->
-        <p><%= @post.title %></p>
+        <p class="post-title"><%= @post.title %></p>
 
         <!-- 著者名の取得　-->
-        <p><%= @post.author %></p>
+        <p class="post-author"><%= "－ " + @post.author %></p>
         <!-- 投稿日時の追加　-->
         <div class="post-time">
         <%= @post.created_at %>    
