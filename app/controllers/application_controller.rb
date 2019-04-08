@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
     #:set_current_userはすべてのcontrollerで利用するため予め宣言
-    #特にユーザー編集画面において[編集]の表示・非表示には有効
     before_action :set_current_user
 
     def set_current_user
