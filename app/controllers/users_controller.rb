@@ -85,15 +85,15 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(
       email: params[:email],
-      password:params[:password]
+      #has_secure_password実装によりpassword:params[:password]は不要
     )
     
-    if @user
+    if @user　&& @user.authenticate(params[:email])
       session[:user_id] = @user.id
       flash[:notice] ="ようこそ"
       redirect_to("/users/#{@user.id}")
     else
-      #入力ミスの場合は、フォーム再表示に利用するため、値を格納（@userはnilのため@emailなどをそのまま利用）
+      #入力ミス時のフォーム再表示に利用するため、値を格納
       @email = params[:email]
       @password = params[:password]
       @error_message="アドレスまたはパスワードが間違っています"

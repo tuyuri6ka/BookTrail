@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-
+    #セキュアなパスワードを実装(passwordに対するvalidatesは不要)
+    has_secure_password
     #name,email,passwordにバリデーション（空白を許さない）を追加
     validates :name,{presence:true}
     validates :email,{presence:true, uniqueness:true}
-    validates :password,{presence:true}
     
 
     def posts
