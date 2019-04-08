@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-
+  #他ユーザーに対する編集制限
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
-  #アクセス制限
+  #他ユーザーに対するアクセス制限
   def ensure_correct_user
     @post = Post.find_by(id: params[:id])
     if @post.user.id != @currernt_user.id

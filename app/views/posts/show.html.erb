@@ -13,11 +13,19 @@
 
         <!-- 著者名の取得　-->
         <p class="post-author"><%= "－ " + @post.author %></p>
-        <!-- 投稿日時の追加　-->
+        <!-- 投稿日時の取得　-->
         <div class="post-time">
         <%= @post.created_at %>    
         </div>
-
+        <% if Like.find_by(user_id:@current_user.id, post_id: @post.id) %>
+          <%= link_to("/likes/#{@post.id}/destroy",{method:"post"}) do %>
+          <span class="fa fa-heart like-btn-unlike"></span>
+          <% end %>
+        <% else %>
+          <%= link_to("/likes/#{@post.id}/create",{method:"post"}) do %>
+          <span class="fa fa-heart like-btn"></span>
+          <% end %>
+        <% end %>
 
         <% if @post.user.id == @current_user.id %>
           <!-- [編集]の追加　-->
