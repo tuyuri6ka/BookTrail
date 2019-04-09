@@ -2,11 +2,11 @@ class UsersController < ApplicationController
  
   #before_action----------------------------------------------
 
-  #非ログイン時のアクセス制限
+  #非ログイン時のURI直接入力によるアクセス制限を設定
   before_action :authenticate_user,{only: [:index,:show,:edit,:update]}
-  #ログイン時のアクセス制限
+  #ログイン時のURI直接入力によるアクセス制限を設定
   before_action :forbid_login_user,{only: [:new,:create,:login_form,:login]}
-  #他ユーザーに対する編集制限
+  #他ユーザー（/users/:id/edit）への編集制限
   before_action :ensure_correct_user,{only: [:edit,:update]}
 
   def ensure_correct_user
@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   #users-----------------------------------------
-
   def index
     @users = User.all
   end
@@ -35,6 +34,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  #MEMO:form_tag利用時のstrong paramterの導入の仕方について
   def create
     @user = User.new(
       name: params[:name],
@@ -55,8 +55,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    
-    #値を格納
     @user.name = params[:name]
     @user.email = params[:email]
     #image.readで画像を抽出し、Flie.binwriter()でpublic内に保存
@@ -85,7 +83,7 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(
       email: params[:email],
-      #has_secure_password実装によりpassword:params[:password]は不要
+      #NOTE:has_secure_password実装によりpassword:params[:password]は不要
     )
     
     if @user　&& @user.authenticate(params[:email])
@@ -93,7 +91,7 @@ class UsersController < ApplicationController
       flash[:notice] ="ようこそ"
       redirect_to("/users/#{@user.id}")
     else
-      #入力ミス時のフォーム再表示に利用するため、値を格納
+      #NOTE:入力ミス時のフォーム再表示に利用するため
       @email = params[:email]
       @password = params[:password]
       @error_message="アドレスまたはパスワードが間違っています"
@@ -110,7 +108,7 @@ class UsersController < ApplicationController
   def likes
     @user = User.find_by(id: params[:id])
     @likes = Like.where(user_id: @user.id)
-
+    @table_id = 0
   end
 
 end

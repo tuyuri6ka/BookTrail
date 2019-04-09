@@ -1,16 +1,20 @@
 class PostsController < ApplicationController
-  #他ユーザーに対する編集制限
-  before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
-  #他ユーザーに対するアクセス制限
+  #before_action----------------------------------------------
+  #他ユーザー（/users/:id/edit）への編集制限
+  before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
+  
+  #他ユーザー（/users/:id/edit）への編集制限
   def ensure_correct_user
     @post = Post.find_by(id: params[:id])
-    if @post.user.id != @currernt_user.id
+    if @post.user_id != @current_user.id
       flash[:notice]= "権限がありません"
-      return_to("/posts/index")
+      redirect_to("/posts/index")
     end
   end
+  #------------------------------------------------------------
 
+  #posts-------------------------------------------------------
   def index
     @posts= Post.all.order(created_at: :desc)
   end
@@ -18,9 +22,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
     @user = @post.user
-    
-    #いいねの数をカウント
-    @likes_count = Like.where(user_id: @current_user).count
+    @likes_count = Like.where(post_id: @post.id).count
   end
 
   def new
@@ -36,7 +38,7 @@ class PostsController < ApplicationController
       user_id: @current_user.id
     )
 
-    #post.save時にvalidatesにより、True/Falseの評価
+    #validatesのpresence:trueにより、True/Falseの評価
     if @post.save
       flash[:notice]="書籍を追加しました"
       redirect_to("/posts/index")
@@ -53,7 +55,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find_by(id: params[:id])
     
-    #下はまとめて代入できそう。
+    #下4行はもっと簡潔に代入できそう。
     @post.title = params[:title]
     @post.author = params[:author]
     @post.page = params[:page]
@@ -71,9 +73,10 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find_by(id: params[:id])
-
+    @like = Like.find_by(post_id: @post.id)
     @post.destroy
-    flash.now[:notice]="登録内容を削除しました"
+    @like.destroy
+    flash[:notice]="登録内容を削除しました"
     redirect_to("/posts/index")
   end
 
@@ -82,9 +85,10 @@ class PostsController < ApplicationController
   end
  
   def find_result
-    #自分の書庫欄のあいまい検索機能（記述が長い）
+    #あいまい検索機能（記述が長い）
     @user = @current_user
     @posts = Post.where("title LIKE ? AND author LIKE ? AND publish_data LIKE ?","%#{params[:title]}%","%#{params[:author]}%","%#{params[:publish_data]}%").where(user_id: @current_user.id)
     @table_id = 0
   end
+
 end

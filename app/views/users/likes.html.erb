@@ -1,35 +1,58 @@
-<!-- 指定されたコードを貼り付けてください -->
+<% provide(:title, "show") %>
 <div class="main user-show">
-  <div class="container">
-    <div class="user">
-      <img src="<%= "/user_images/#{@user.image_name}" %>">
-      <h2><%= @user.name %></h2>
-      <p><%= @user.email %></p>
-      <% if @user.id == @current_user.id %>
-        <%= link_to("編集", "/users/#{@user.id}/edit") %>
-      <% end %>
+  <div class="container-user-show">
+    
+    <div class ="show-user-left"> 
+      <div class ="user">
+        <img src="<%= "/user_images/#{@user.image_name}" %>">
+        <h2><%= @user.name %></h2>
+        <p><%= @user.email %></p>
+
+        <% if @current_user.id == @user.id %>
+          <%= link_to("編集", "/users/#{@user.id}/edit") %>
+        <% end %>
+      </div>
+      <div class ="show-user-btn">
+        <ul>
+        <% if @current_user.id == @user.id %>
+          <li><%= link_to("追加", "/posts/new", class:"show-user-btn") %></li>
+        <% end %>
+          <li><%= link_to("検索", "/find",class:"show-user-btn") %></li>
+        </ul>
+      </div>
     </div>
     
-    <ul class="user-tabs">
+    <div class = "table-box-shadow">
+      <ul class="user-tabs">
       <li><%= link_to("投稿", "/users/#{@user.id}") %></li>
       <li class="active"><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
-    </ul>
-    
-    <% @likes.each do |like| %>
-      <% post = Post.find_by(id: like.post_id) %>
-      
-      <div class="posts-index-item">
-        <div class="post-left">
-          <img src="<%= "/user_images/#{post.user.image_name}" %>">
-        </div>
-        <div class="post-right">
-          <div class="post-user-name">
-            <%= link_to(post.user.name, "/users/#{post.user.id}") %>
-          </div>
-          <%= link_to(post.title, "/posts/#{post.id}") %>
-        </div>
+      </ul>
+      <div class="user-table-right">
+        <table>
+        <thead>
+            <tr>
+            <th>id</th>
+            <th>書籍</th>
+            <th>著者</th>
+            <th>頁数</th>
+            <th>出版社</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @likes.each do |like| %>
+        <% post = Post.find_by(id: like.post_id) %>
+        <% @table_id = @table_id + 1 %>
+          <tr>
+          <td class="tdata table-id"><%= @table_id %></td>
+          <td class="tdata table-title"><%= link_to(post.title, "/posts/#{post.id}") %></td>
+          <td class="tdata table-author"><%= link_to(post.author,"/posts/#{post.id}") %></td>
+          <td class="tdata table-page"><%= link_to(post.page,"/posts/#{post.id}") %></td>
+          <td class="tdata table-publish-data"><%= link_to(post.publish_data,"/posts/#{post.id}") %></td>
+          </tr>
+        <% end %>
+        </tbody>
+        </table>
       </div>
-    <!-- each文のendを追加してください -->
-    <% end %>
+    </div>
   </div>
 </div>

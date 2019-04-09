@@ -50,13 +50,8 @@
     margin:80px auto;
   }
   
-  .amsn{
-    display:inline-block;
-    vertical-align: top;
-  }
-
   .user-table-right{
-    width:75%;
+    width:100%;
     box-shadow: 0px 0px 3px rgba(128, 128, 128, 0.5);
   }
 
@@ -70,6 +65,8 @@
   }
 
   .show-user-left{
+    vertical-align: top;
+    display:inline-block;
     width:20%;
     height:285px;
     margin-right: 40px;
@@ -133,11 +130,17 @@
     padding: 0 6px 0 8px;
   }
   
+  .table-box-shadow{
+    width:70%;
+    vertical-align: top;
+    display:inline-block;
+  }
+
   .user-tabs {
-    margin-top: 40px;
+    width:150px;
     background-color: white;
     overflow: hidden;
-    box-shadow: 0 2px 6px #c1ced7;
+    box-shadow: 0 2px 4px #c1ced7;
   }
   
   .user-tabs li {
@@ -154,7 +157,7 @@
   
   .user-tabs a {
     display: inline-block;
-    padding: 16px 30px;
+    padding: 6px 17px;
     color: #afb6bf;
   }
   
@@ -178,7 +181,6 @@ table{
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
-
 }
 
 table tr{

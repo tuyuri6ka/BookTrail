@@ -2,7 +2,7 @@
 <div class="main user-show">
   <div class="container-user-show">
     
-      <div class ="show-user-left amsn"> 
+    <div class ="show-user-left"> 
       <div class ="user">
         <img src="<%= "/user_images/#{@user.image_name}" %>">
         <h2><%= @user.name %></h2>
@@ -20,38 +20,39 @@
           <li><%= link_to("検索", "/find",class:"show-user-btn") %></li>
         </ul>
       </div>
-      </div>
-
+    </div>
+    
+    <div class = "table-box-shadow">
       <ul class="user-tabs">
       <li class="active"><%= link_to("投稿", "/users/#{@user.id}") %></li>
       <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
-    </ul>
-
-    <div class="user-table-right amsn">
-      <table>
-      <thead>
+      </ul>
+      <div class="user-table-right">
+        <table>
+        <thead>
+            <tr>
+            <th>id</th>
+            <th>書籍</th>
+            <th>著者</th>
+            <th>頁数</th>
+            <th>出版社</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @user.posts.each do|post| %>
+          
+        <% @table_id = @table_id + 1 %>
           <tr>
-          <th>id</th>
-          <th>書籍</th>
-          <th>著者</th>
-          <th>頁数</th>
-          <th>出版社</th>
+          <td class="tdata table-id"><%= @table_id %></td>
+          <td class="tdata table-title"><%= link_to(post.title, "/posts/#{post.id}") %></td>
+          <td class="tdata table-author"><%= link_to(post.author,"/posts/#{post.id}") %></td>
+          <td class="tdata table-page"><%= link_to(post.page,"/posts/#{post.id}") %></td>
+          <td class="tdata table-publish-data"><%= link_to(post.publish_data,"/posts/#{post.id}") %></td>
           </tr>
-      </thead>
-      <tbody>
-      <% @user.posts.each do|post| %>
-      <% @table_id = @table_id + 1 %>
-        <tr>
-        <td class="tdata table-id"><%= @table_id %></td>
-        <td class="tdata table-title"><%= link_to(post.title, "/posts/#{post.id}") %></td>
-        <td class="tdata table-author"><%= link_to(post.author,"/posts/#{post.id}") %></td>
-        <td class="tdata table-page"><%= link_to(post.page,"/posts/#{post.id}") %></td>
-        <td class="tdata table-publish-data"><%= link_to(post.publish_data,"/posts/#{post.id}") %></td>
-        </tr>
-      <% end %>
-      </tbody>
-      </table>
+        <% end %>
+        </tbody>
+        </table>
+      </div>
     </div>
-
   </div>
 </div>
