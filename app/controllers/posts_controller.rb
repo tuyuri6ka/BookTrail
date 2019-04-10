@@ -66,7 +66,7 @@ class PostsController < ApplicationController
       flash[:notice]="登録内容を変更しました"
       redirect_to("/posts/index")
     else
-      flash.now[:notice]="変更内容に誤りがあります"       #flash.nowはアクションが進まないときに利用
+      flash.now[:notice]="変更内容に誤りがあります"
       render("/posts/edit")
     end
   end
@@ -85,7 +85,7 @@ class PostsController < ApplicationController
   end
  
   def find_result
-    #あいまい検索機能（記述が長い）
+    #メモ：あいまい検索機能（記述が長い）
     @user = @current_user
     @posts = Post.where("title LIKE ? AND author LIKE ? AND publish_data LIKE ?","%#{params[:title]}%","%#{params[:author]}%","%#{params[:publish_data]}%").where(user_id: @current_user.id)
     @table_id = 0
