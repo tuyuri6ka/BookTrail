@@ -1,9 +1,18 @@
 class ApplicationController < ActionController::Base
-    #:set_current_userはすべてのcontrollerで利用するため予め宣言
+    #:set_current_userは先だって利用するため予め宣言
     before_action :set_current_user
 
     def set_current_user
-        @current_user = User.find_by(id: session[:user_id])
+        if session[:user_id]
+            @current_user ||= User.find_by(id: session[:user_id])
+        #cookiesを利用した永続セッションの確立
+        elsif cookies.signed[:user_id]
+            user = User.find_by(id: cookies.signed[:user_ud])
+            if user && user.authenticated?(cookies[:remember_token])
+                session[:user_id] = user.id
+                @current_user = user
+            end
+        end
     end
 
     #非ログイン時のアクセス制限

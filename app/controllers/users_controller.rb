@@ -89,6 +89,11 @@ class UsersController < ApplicationController
     if @user　&& @user.authenticate(params[:email])
       session[:user_id] = @user.id
       flash[:notice] ="ようこそ"
+      #Remember_me機能（ユーザーセッションの永続化）の実装
+      user.remember
+      cookies.permanent.signed[:user_id] = user.id
+      cookies.permanent[:remembaer_token] = user.remember_token
+
       redirect_to("/users/#{@user.id}")
     else
       #NOTE:入力ミス時のフォーム再表示に利用するため
@@ -101,7 +106,14 @@ class UsersController < ApplicationController
   end
 
   def logout
+    @user = User.find_by(id: session[:user_id])
+    @user.forget
     session[:user_id] = nil
+    current_user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+    @current_user = nil
+
     redirect_to("/login")
   end
 
