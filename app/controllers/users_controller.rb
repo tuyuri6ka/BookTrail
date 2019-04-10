@@ -2,11 +2,11 @@ class UsersController < ApplicationController
  
   #before_action----------------------------------------------
 
-  #非ログイン時のURI直接入力によるアクセス制限を設定
+  #非ログイン時のURI直接入力によるアクセス制限を設定するため
   before_action :authenticate_user,{only: [:index,:show,:edit,:update]}
-  #ログイン時のURI直接入力によるアクセス制限を設定
+  #ログイン時のURI直接入力によるアクセス制限を設定するため
   before_action :forbid_login_user,{only: [:new,:create,:login_form,:login]}
-  #他ユーザー（/users/:id/edit）への編集制限
+  #他ユーザー（/users/:id/edit）への編集制限するため
   before_action :ensure_correct_user,{only: [:edit,:update]}
 
   def ensure_correct_user
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  #MEMO:form_tag利用時のstrong paramterの導入の仕方について
+  #メモ:form_forでなく、form_tag利用時におけるstrong paramterとの実装法が不明
   def create
     @user = User.new(
       name: params[:name],
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     @user.name = params[:name]
     @user.email = params[:email]
-    #image.readで画像を抽出し、Flie.binwriter()でpublic内に保存
+    #メモ：image.readで画像を抽出し、Flie.binwriter()でpublic内に保存
     if image = params[:image]
       @user.image_name= "#{@user.id}.jpg"
       File.binwrite("public/user_images/#{@user.image_name}",image.read)
@@ -81,22 +81,19 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(
-      email: params[:email],
-      #NOTE:has_secure_password実装によりpassword:params[:password]は不要
-    )
+    @user = User.find_by(email: params[:email])
     
-    if @user　&& @user.authenticate(params[:email])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] ="ようこそ"
-      #Remember_me機能（ユーザーセッションの永続化）の実装
-      user.remember
-      cookies.permanent.signed[:user_id] = user.id
-      cookies.permanent[:remembaer_token] = user.remember_token
+      #Remember_me機能（ユーザーセッションの永続化）の実装のため
+      @user.remember
+      cookies.permanent.signed[:user_id] = @user.id
+      cookies.permanent[:remember_token] = @user.remember_token
 
       redirect_to("/users/#{@user.id}")
     else
-      #NOTE:入力ミス時のフォーム再表示に利用するため
+      #メモ:入力ミス時のフォーム再表示に利用するため
       @email = params[:email]
       @password = params[:password]
       @error_message="アドレスまたはパスワードが間違っています"
@@ -109,7 +106,6 @@ class UsersController < ApplicationController
     @user = User.find_by(id: session[:user_id])
     @user.forget
     session[:user_id] = nil
-    current_user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
     @current_user = nil

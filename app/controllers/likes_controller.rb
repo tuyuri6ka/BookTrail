@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-    #非ログイン時のアクセス制限
+    #非ログイン時のURI直接入力によるアクセス制限を設定するため
     before_action :authenticate_user
     
     def create

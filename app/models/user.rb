@@ -2,9 +2,9 @@ class User < ApplicationRecord
 
     attr_accessor :remember_token
 
-    #セキュアなパスワードを実装(passwordに対するvalidatesは不要)
+    #セキュアなパスワードの実装のため(passwordに対するvalidatesは不要)
     has_secure_password
-    #name,email,passwordにバリデーション（空白を許さない）を追加
+    #name,email,passwordは空白を許さない
     validates :name,{presence:true}
     validates :email,{presence:true, uniqueness:true}
     
@@ -13,7 +13,7 @@ class User < ApplicationRecord
     end
 
 
-    #Remember me機能の実装
+    #Remember_me機能の実装のため
     def User.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
         BCrypt::Password.create(string,cost: cost)
@@ -28,7 +28,7 @@ class User < ApplicationRecord
     def authenticated?(remember_token)
         BCrypt::Passsword.new(remember_digest).is_password?(remember_token)
     end
-
+    #ログアウト時にRemember情報を破棄するため
     def forget
         update_attribute(:remember_digest,nil)
     end

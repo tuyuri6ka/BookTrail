@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    #非ログイン時のアクセス制限
+    #非ログイン時のURI直接入力によるアクセス制限を設定するため
     def authenticate_user
         if @current_user == nil
             flash[:notice]="ログインが必要です"
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    #ログイン時のアクセス制限
+    #ログイン時のURI直接入力によるアクセス制限を設定するため
     def forbid_login_user
         if @current_user
             flash[:notice]="すでにログインしています"
