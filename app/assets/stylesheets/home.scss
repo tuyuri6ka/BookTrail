@@ -237,6 +237,12 @@
     float: right;
   }
   
+  label, input[type="checkbox"] {
+    cursor: pointer;
+    width: 15px;
+    margin-top:15px;
+  }
+
   .form-body:after {
     content: '';
     display: table;

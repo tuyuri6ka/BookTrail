@@ -87,7 +87,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       flash[:notice] ="ようこそ"
       #Remember_me機能（ユーザーセッションの永続化）の実装のため
-      @user.remember
+      params[:remember_me] =='1' ? @user.remember : @user.forget
       cookies.permanent.signed[:user_id] = @user.id
       cookies.permanent[:remember_token] = @user.remember_token
 
