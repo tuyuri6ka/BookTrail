@@ -82,12 +82,13 @@ class PostsController < ApplicationController
 
   def find_form
     @post = Post.new
+    @user = User.find_by(id: params[:id])
   end
  
   def find_result
     #メモ：あいまい検索機能（記述が長い）
-    @user = @current_user
-    @posts = Post.where("title LIKE ? AND author LIKE ? AND publish_data LIKE ?","%#{params[:title]}%","%#{params[:author]}%","%#{params[:publish_data]}%").where(user_id: @current_user.id)
+    @user = User.find_by(id: params[:id])
+    @posts = Post.where("title LIKE ? AND author LIKE ? AND publish_data LIKE ?","%#{params[:title]}%","%#{params[:author]}%","%#{params[:publish_data]}%").where(user_id: @user.id)
     @table_id = 0
   end
 

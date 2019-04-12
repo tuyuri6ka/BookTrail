@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   get "/users/:id" => "users#show"
 
   #posts_controller
-  get "/find" => "posts#find_form"
-  post "/find_result" => "posts#find_result"
+  get "/find/:id" => "posts#find_form"
+  post "/find_result/:id" => "posts#find_result"
   get "/find_result" => "posts#find_result"
 
   get "/posts/index" => "posts#index"

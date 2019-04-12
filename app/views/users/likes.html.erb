@@ -2,7 +2,7 @@
 <div class="main user-show">
   <div class="container-user-show">
     
-    <div class ="show-user-left"> 
+    <div class ="user-show-left"> 
       <div class ="user">
         <img src="<%= "/user_images/#{@user.image_name}" %>">
         <h2><%= @user.name %></h2>
@@ -12,12 +12,12 @@
           <%= link_to("編集", "/users/#{@user.id}/edit") %>
         <% end %>
       </div>
-      <div class ="show-user-btn">
+      <div class ="user-show-btn">
         <ul>
         <% if @current_user.id == @user.id %>
-          <li><%= link_to("追加", "/posts/new", class:"show-user-btn") %></li>
+          <li><%= link_to("追加", "/posts/new") %></li>
         <% end %>
-          <li><%= link_to("検索", "/find",class:"show-user-btn") %></li>
+          <li><%= link_to("検索", "/find") %></li>
         </ul>
       </div>
     </div>

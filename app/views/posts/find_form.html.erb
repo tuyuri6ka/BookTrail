@@ -13,7 +13,7 @@
             </div>
         <% end %>
 
-        <%= form_tag("/find_result") do %>
+        <%= form_tag("/find_result/#{@user.id}") do %>
             <p>書籍名</p>
             <input name ="title" value ="<%= @post.title %>">
             <p>著者</p>
