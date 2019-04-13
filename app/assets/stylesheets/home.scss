@@ -40,7 +40,7 @@
     color: #2d3133;
     margin: 0;
     min-height: 1vh;
-    background-image: url("/a3.png");
+    background-image: url("/site_images/a3.png");
   }
   
   .main {
@@ -50,7 +50,7 @@
     height: auto;
     min-height: 100%;
     background-color: #e5e4e6;
-    background-image: url("/a3.png");
+    background-image: url("/site_images/a3.png");
   }
   
   .container {
@@ -122,7 +122,7 @@
     background-repeat: no-repeat;
     background-position: center 50%;
     background-size: cover;
-    background-image: url("/top.jpg");
+    background-image: url("/site_images/top.jpg");
   }
   
   .top-message {
@@ -161,7 +161,8 @@
   }
   
   .about-img {
-    width: 84%;
+    margin-top:30px;
+    width: 100%;
   }
   
   /* フォーム================================ */
