@@ -4,14 +4,17 @@
     <div class="form-heading">本の広場</div>
         <% @posts.each do |post| %>
         <div class="posts-index-item">
-            <div class="post-left">
+            <div class="posts-left">
                 <img src="<%= "/user_images/#{post.user.image_name}" %>">
             </div>
-            <div class="post-right">
-                <div class="post-user-name">
+            <div class="posts-right">
+                <div class="posts-user-name">
                     <%= link_to(post.user.name, "/users/#{post.user.id}") %>
                 </div>
-            <p>「<%= link_to(post.title, "/posts/#{post.id}") %>」 著：<%= link_to(post.author, "/posts/#{post.id}") %></p>
+                <ul>
+                    <li class="posts-left-content">「<%= link_to(post.title, "/posts/#{post.id}") %>」</li>
+                    <li class="posts-right-content"> 著：<%= link_to(post.author, "/posts/#{post.id}") %></p\li>
+                </ul>
             </div>
         </div>
         <% end %>
