@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
  
-  #before_action----------------------------------------------
+  #before_action----------------------------------
 
   #非ログイン時のURI直接入力によるアクセス制限を設定するため
   before_action :authenticate_user,{only: [:index,:show,:edit,:update]}
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       redirect_to("/posts/index")
     end
   end
-
+  #----------------------------------------------
   #users-----------------------------------------
   def index
     @users = User.all
