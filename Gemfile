@@ -53,6 +53,7 @@ end
 
 group :production do
   gem 'pg','0.20.0' #追加
+  gem 'rails_12factor' #追加
 end
 
 group :test do
