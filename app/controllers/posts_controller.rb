@@ -73,9 +73,12 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find_by(id: params[:id])
-    @like = Like.find_by(post_id: @post.id)
     @post.destroy
-    @like.destroy
+
+    if @like = Like.find_by(post_id: @post.id)
+      @like.destroy
+    end
+    
     flash[:notice]="登録内容を削除しました"
     redirect_to("/posts/index")
   end
