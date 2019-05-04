@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.4.5'
+ruby '2.4.6'
 
 # Use jQuery 追加
 gem 'jquery-rails'
