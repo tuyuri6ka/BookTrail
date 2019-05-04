@@ -28,11 +28,11 @@ Rails.application.routes.draw do
   post "/posts/create" => "posts#create"
   get "/posts/:id/edit" => "posts#edit"
   post "/posts/:id/update" => "posts#update"
-  get "/posts/:id/destroy" => "posts#destroy"
+  get "/posts/:id/destroy" => "posts#destroy"   #本来ならpostで取るべきだがなぜか機能しないので、getでキャッチする
   get "/posts/:id" => "posts#show"
 
-  #likes_controller
-  post "/likes/:post_id/create" => "likes#create"
-  post "/likes/:post_id/destroy" => "likes#destroy"
+  #likes_controller  #本来ならpostで取るべきだがなぜか機能しないので、getでキャッチする
+  get "/likes/:post_id/create" => "likes#create"
+  get "/likes/:post_id/destroy" => "likes#destroy"
 
 end

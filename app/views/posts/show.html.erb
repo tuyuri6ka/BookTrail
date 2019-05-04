@@ -18,11 +18,11 @@
         <%= @post.created_at %>    
         </div>
         <% if Like.find_by(user_id:@current_user.id, post_id: @post.id) %>
-          <%= link_to("/likes/#{@post.id}/destroy",{method:"post"}) do %>
+          <%= link_to("/likes/#{@post.id}/destroy") do %>   <!-- {method:"post"} -->
             <span class="fa fa-heart like-btn-unlike"></span>
           <% end %>
         <% else %>
-          <%= link_to("/likes/#{@post.id}/create",{method:"post"}) do %>
+          <%= link_to("/likes/#{@post.id}/create") do %>  <!-- {method:"post"} -->
             <span class="fa fa-heart like-btn"></span>
           <% end %>
         <% end %>
@@ -30,7 +30,8 @@
         <% if @post.user.id == @current_user.id %>
           <div class="post-menus">
               <%= link_to("編集","/posts/#{@post.id}/edit") %>
-              <%= link_to("削除","/posts/#{@post.id}/destroy") %>
+              <!-- 以下のlink_toは本来{method:"post"}とし、rootでpostで取るべき -->
+              <%= link_to("削除","/posts/#{@post.id}/destroy") %>   
           </div>
         <% end %>
     </div>
