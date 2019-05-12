@@ -17,7 +17,7 @@
         <% if @current_user.id == @user.id %>
           <li><%= link_to("追加", "/posts/new") %></li>
         <% end %>
-          <li><%= link_to("検索", "/find") %></li>
+          <li><%= link_to("検索", "/find/#{@user.id}") %></li>
         </ul>
       </div>
     </div>
