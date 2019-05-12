@@ -36,12 +36,7 @@ class UsersController < ApplicationController
 
   #メモ:form_forでなく、form_tag利用時におけるstrong paramterとの実装法が不明
   def create
-    @user = User.new(
-      name: params[:name],
-      email:params[:email],
-      password:params[:password],
-      image_name: "default_user_image.jpg"
-    )
+    @user = User.new(user_params)
 
     if @user.save
       session[:user_id]= @user.id
@@ -118,5 +113,13 @@ class UsersController < ApplicationController
     @likes = Like.where(user_id: @user.id)
     @table_id = 0
   end
+
+
+
+  private
+    #strong_parameterの実装
+    def user_params
+      params.require(:user).permit(:name, :email, :password)
+    end
 
 end
