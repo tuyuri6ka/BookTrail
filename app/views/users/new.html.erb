@@ -5,10 +5,8 @@
     <div class="form users-form">
       <div class="form-body">
 
-      <!-- 入力ミスがあった場合に、エラーを表示 -->
-      <%= render "shared/error_messages" %>
-
       <%= form_for @user do |f| %>
+        <%= render "shared/error_messages" %>
         <p>ユーザー名</p>
         <%= f.text_field :name %>
         <p>メールアドレス</p>

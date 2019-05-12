@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       flash[:notice]="ようこそ"
       redirect_to @user   # redirect_to("/users/#{@user.id}")に同じ
     else
-      render "new"       # render("/users/new")に同じ
+      render"new"       # render("/users/new")に同じ
     end
   end
 
@@ -79,12 +79,11 @@ class UsersController < ApplicationController
     
     if @user && @user.authenticate(params[:user][:password])
       log_in @user
+      remember(user)
 
-      # session[:user_id] = @user.id
       #Remember_me機能（ユーザーセッションの永続化）の実装のため
       params[:remember_me] =='1' ? @user.remember : @user.forget
-      cookies.permanent.signed[:user_id] = @user.id
-      cookies.permanent[:remember_token] = @user.remember_token
+
 
       redirect_to @user  # user_url(user)すなわちredirect_to("/users/#{@user.id}")に同じ
     else
@@ -98,10 +97,10 @@ class UsersController < ApplicationController
   def logout
     @user = User.find_by(id: session[:user_id])
     @user.forget
+    @current_user = nil
     session[:user_id] = nil
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
-    @current_user = nil
 
     redirect_to("/login")
   end
