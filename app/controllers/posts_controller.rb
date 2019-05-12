@@ -2,10 +2,10 @@ class PostsController < ApplicationController
 
   #before_action----------------------------------------------
   #他ユーザー（/users/:id/edit）への編集制限
-  before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
+  before_action :correct_user,{only: [:edit, :update, :destroy]}
   
   #他ユーザー（/users/:id/edit）への編集制限
-  def ensure_correct_user
+  def correct_user
     @post = Post.find_by(id: params[:id])
     if @post.user_id != @current_user.id
       flash[:notice]= "権限がありません"

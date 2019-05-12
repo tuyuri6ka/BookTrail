@@ -2,16 +2,10 @@ class UsersController < ApplicationController
  
   # before_action
   ## 非ログイン時・ログイン時・他ユーザーのアクセス制限
-  before_action :authenticate_user,{only: [:index,:show,:edit,:update]}
+  before_action :require_login,{only: [:index,:show,:edit,:update]}
   before_action :forbid_login_user,{only: [:new,:create,:login_form,:login]}
-  before_action :ensure_correct_user,{only: [:edit,:update]}
+  before_action :correct_user,{only: [:edit,:update]}
 
-  def ensure_correct_user
-    if @current_user.id != params[:id].to_i
-      flash[:notice]="権限がありません"
-      redirect_to("/posts/index")
-    end
-  end
 
   # users-----------------------------------------
 
@@ -35,11 +29,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
+      session[:user_id] = @user.id
       flash[:notice]="ようこそ"
-      redirect_to @user
+      redirect_to(@user)
     else
-      render　"new"
+      render("new")
     end
   end
 
@@ -73,11 +67,11 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:user][:email])
     
     if @user && @user.authenticate(params[:user][:password])
-      log_in @user
+      session[:user_id] = @user.id
       #Remember_me機能の有効化
       params[:user][:remember] =='1' ? remember(@user) : forget(@user)
 
-      redirect_to @user  # user_url(user)すなわちredirect_to("/users/#{@user.id}")に同じ
+      redirect_to(@user)  # user_url(user)すなわちredirect_to("/users/#{@user.id}")に同じ
     else
       @user = User.new(user_params)
       @error_message="アドレスまたはパスワードが間違っています"
@@ -88,7 +82,6 @@ class UsersController < ApplicationController
 
   def logout
     @user = User.find_by(id: session[:user_id])
-
     if logged_in?
       log_out
     end
@@ -104,12 +97,19 @@ class UsersController < ApplicationController
   end
 
 
-
   private
     #strong_parameterの実装
     def user_params
       params.require(:user).permit(:name, :email, :password)
     end
 
+    
+    def correct_user
+      @user = User.find(params[:id])
+      if @current_user.id != @user
+        flash[:notice]="権限がありません"
+        redirect_to("/posts/index")
+      end
+    end
 
 end

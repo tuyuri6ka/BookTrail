@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     before_action :set_current_user
 
     # 非ログイン時のURI直接入力によるアクセス制限を設定するため
-    def authenticate_user
+    def require_login
         if @current_user == nil
             flash[:notice]="ログインが必要です"
             redirect_to("/login")
