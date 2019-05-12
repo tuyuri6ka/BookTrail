@@ -1,13 +1,10 @@
 class User < ApplicationRecord
-    has_many :posts, dependent: :destroy
-
     attr_accessor :remember_token
-
-    #セキュアなパスワードの実装のため(passwordに対するvalidatesは不要)
+    has_many :posts, dependent: :destroy
     has_secure_password
-    #name,email,passwordは空白を許さない
-    validates :name,{presence:true}
+    validates :name, {presence:true}
     validates :email,{presence:true, uniqueness:true}
+    validates :password, {presence:true, length:{minimum: 1}}
     
     def posts
         return Post.where(user_id: self.id)

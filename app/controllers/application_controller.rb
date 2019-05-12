@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    include UsersHelper
+
     #:set_current_userは先だって利用するため予め宣言
     before_action :set_current_user
 

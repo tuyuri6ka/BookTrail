@@ -1,7 +1,7 @@
 <header>
     <div class="header-logo">   
       <% if @current_user %> 
-        <%= link_to("BookTrail","/users/#{@current_user.id}") %>
+        <%= link_to "BookTrail", @current_user %>
       <% else %>
         <%= link_to("BookTrail","/") %>
       <% end %>

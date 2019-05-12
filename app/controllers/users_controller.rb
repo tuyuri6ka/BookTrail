@@ -41,10 +41,10 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id]= @user.id
       flash[:notice]="ようこそ"
-      redirect_to("/users/#{@user.id}")
+      redirect_to @user   # redirect_to("/users/#{@user.id}")に同じ
     else
       flash.now[:notice]="入力内容に誤りがあります"
-      render("/users/new")
+      render　"new"       # render("/users/new")に同じ
     end
   end
 
@@ -79,15 +79,17 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:user][:email])
     
     if @user && @user.authenticate(params[:user][:password])
-      session[:user_id] = @user.id
-      flash[:notice] ="ようこそ"
+      log_in @user
+
+      # session[:user_id] = @user.id
       #Remember_me機能（ユーザーセッションの永続化）の実装のため
       params[:remember_me] =='1' ? @user.remember : @user.forget
       cookies.permanent.signed[:user_id] = @user.id
       cookies.permanent[:remember_token] = @user.remember_token
 
-      redirect_to("/users/#{@user.id}")
+      redirect_to @user  # user_url(user)すなわちredirect_to("/users/#{@user.id}")に同じ
     else
+      @user = User.new(user_params)
       @error_message="アドレスまたはパスワードが間違っています"
       flash.now[:notice] = "入力内容に誤りがあります"
       render("/users/login_form")
