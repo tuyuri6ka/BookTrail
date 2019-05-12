@@ -27,7 +27,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(
+      name:params[:user][:name],
+      email:params[:user][:email],
+      password:params[:user][:password],
+      image_name: "default_user_image.jpg")
     if @user.save
       session[:user_id] = @user.id
       flash[:notice]="ようこそ"
