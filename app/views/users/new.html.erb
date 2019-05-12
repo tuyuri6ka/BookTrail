@@ -8,7 +8,7 @@
       <!-- 入力ミスがあった場合に、エラーを表示 -->
       <%= render "shared/signup_error_messages" %>
 
-        <%= form_for @user, :url => { :controller => :users, :action => :create}  do |f| %>
+        <%= form_for @user  do |f| %>
             <p>ユーザー名</p>
             <%= f.text_field :name %>
             <p>メールアドレス</p>

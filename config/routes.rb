@@ -5,17 +5,12 @@ Rails.application.routes.draw do
   get "/about"              => "home#about"
   
   #ユーザーのCRUD処理
-  get "/users/index"        => "users#index"
-  get "/users/new"          => "users#new"
+  resources :users
+
   get "/login"              => "users#login_form"
   get "/logout"             => "users#logout"
   get "/users/:id/likes"    => "users#likes"
-  get "/users/:id/edit"     => "users#edit"
-  get "/users/:id"          => "users#show"
   post "/login"             => "users#login"
-  post "/users/create"      => "users#create"
-  post "/users/:id/update"  => "users#update"
-  post "/users/:id/destroy" => "users#destroy"
 
   #書籍投稿のCRUD処理
   get "/posts/index"        => "posts#index"
