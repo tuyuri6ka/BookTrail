@@ -5,22 +5,22 @@ BookTrail（β版）
 ・登録した本は全ユーザー共通のTLにポストされ、自分の読んだ本・他人の読んでいる本を一覧できます。<br>
 ・自分自身の読書の記録を残すとともに、他人の読んでいる本にも触れ、新たな本を開拓しましょう。<br>
 
-<2019.04.20>※試用版としてブラウザ上からアクセスできるようにしました。<br>
-<2019.04.20>※以下のリンクよりアクセス可能です。https://book-trail.herokuapp.com/ <br>
-<2019.05.05>※試用のみしてみたい方は「ユーザー名：aiueo, パスワード：aiueo」でもログインできます。
-注：Password再設定機能がありませんので、ご注意ください。サポート体制はございません。<br>
-注︰E-mailが求められますが、存在しているE-mailでなくても問題ありません。<br>
+<2019.04.20>※ブラウザ上で動作確認できるようにしました。  
+<2019.04.20>※以下のリンクよりアクセス可能です。https://book-trail.herokuapp.com/  
+<2019.05.05>※試用のみしてみたい方は「ユーザー名：admin,Email:admin@admin,パスワード：admin」でログインできます。  
+注：Password再設定機能がありませんので、ご注意ください。サポート体制はございません。  
+注︰E-mailが求められますが、存在しているE-mailでなくても問題ありません。  
 
 ## 本番環境
-・言語：Ruby<br>
-・フレームワーク：Ruby on Rails<br>
-・DB：PostgreSQL<br>
-・エディタ：VSCode<br>
-・サーバ：Heroku
+- 言語：Ruby
+- フレームワーク：Ruby on Rails
+- DB：PostgreSQL
+- エディタ：VSCode
+- サーバ：Heroku
 
 ## 開発環境
-・言語：Ruby<br>
-・フレームワーク：Ruby on Rails<br>
-・DB：SQLite3<br>
-・エディタ：VSCode<br>
+- 言語：Ruby
+- フレームワーク：Ruby on Rails
+- DB：SQLite3
+- エディタ：VSCode
 
