@@ -1,11 +1,11 @@
 <header>
-      <div class="header-logo">   
+    <div class="header-logo">   
       <% if @current_user %> 
         <%= link_to("BookTrail","/users/#{@current_user.id}") %>
       <% else %>
         <%= link_to("BookTrail","/") %>
       <% end %>
-      </div>
+    </div>
 
       <ul class="header-menus">
         <% if @current_user %>
@@ -36,4 +36,4 @@
           </li>
         <% end %>
       </ul>
-    </header>
+</header>
