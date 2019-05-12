@@ -30,7 +30,7 @@ class User < ApplicationRecord
         BCrypt::Passsword.new(remember_digest).is_password?(remember_token)
     end
     
-    #ログアウト時にRemember情報を破棄するため
+    ## 5. ログイン情報を破棄する
     def forget
         update_attribute(:remember_digest,nil)
     end

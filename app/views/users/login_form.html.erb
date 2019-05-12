@@ -13,9 +13,8 @@
             <%= f.email_field :email %>
             <p>パスワード</p>
             <%= f.password_field :password %>
-            <label for="checkbox">
-            <input type="checkbox" name="remember_me" id="checkbox" value="1">ログインしたままにする
-            </label>
+            <%= f.check_box :remember %>
+　          <span>ログインしたままにする</span>
             <%= f.submit "ログイン" %>
           <% end %>
 

@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
  
-  #before_action----------------------------------
-
-  #非ログイン時のURI直接入力によるアクセス制限を設定するため
+  # before_action
+  ## 非ログイン時・ログイン時・他ユーザーのアクセス制限
   before_action :authenticate_user,{only: [:index,:show,:edit,:update]}
-  #ログイン時のURI直接入力によるアクセス制限を設定するため
   before_action :forbid_login_user,{only: [:new,:create,:login_form,:login]}
-  #他ユーザー（/users/:id/edit）への編集制限するため
   before_action :ensure_correct_user,{only: [:edit,:update]}
 
   def ensure_correct_user
@@ -15,8 +12,9 @@ class UsersController < ApplicationController
       redirect_to("/posts/index")
     end
   end
-  #----------------------------------------------
-  #users-----------------------------------------
+
+  # users-----------------------------------------
+
   def index
     @users = User.all
   end
@@ -34,16 +32,14 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  #メモ:form_forでなく、form_tag利用時におけるstrong paramterとの実装法が不明
   def create
     @user = User.new(user_params)
-
     if @user.save
       log_in @user
       flash[:notice]="ようこそ"
-      redirect_to @user   # redirect_to("/users/#{@user.id}")に同じ
+      redirect_to @user
     else
-      render"new"       # render("/users/new")に同じ
+      render　"new"
     end
   end
 
@@ -66,9 +62,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    redirect_to("/login")
-  end
+
+  # login・logout-------------------------------------
 
   def login_form
     @user = User.new
@@ -79,11 +74,8 @@ class UsersController < ApplicationController
     
     if @user && @user.authenticate(params[:user][:password])
       log_in @user
-      remember(user)
-
-      #Remember_me機能（ユーザーセッションの永続化）の実装のため
-      params[:remember_me] =='1' ? @user.remember : @user.forget
-
+      #Remember_me機能の有効化
+      params[:user][:remember] =='1' ? remember(@user) : forget(@user)
 
       redirect_to @user  # user_url(user)すなわちredirect_to("/users/#{@user.id}")に同じ
     else
@@ -96,14 +88,14 @@ class UsersController < ApplicationController
 
   def logout
     @user = User.find_by(id: session[:user_id])
-    @user.forget
-    @current_user = nil
-    session[:user_id] = nil
-    cookies.delete(:user_id)
-    cookies.delete(:remember_token)
 
-    redirect_to("/login")
+    if logged_in?
+      log_out
+    end
+    redirect_to root_url
   end
+
+  # いいね機能-----------------------------------------
 
   def likes
     @user = User.find_by(id: params[:id])
@@ -118,5 +110,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password)
     end
+
 
 end
