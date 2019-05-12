@@ -17,6 +17,7 @@ BookTrail（β版）
 ・DB：PostgreSQL<br>
 ・エディタ：VSCode<br>
 ・サーバ：Heroku
+
 ## 開発環境
 ・言語：Ruby<br>
 ・フレームワーク：Ruby on Rails<br>
