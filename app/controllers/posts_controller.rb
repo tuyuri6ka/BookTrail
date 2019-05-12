@@ -29,6 +29,10 @@ class PostsController < ApplicationController
       user_id: @current_user.id
     )
 
+    if @post.page == nil
+      @post.page = 0
+    end
+
     #validatesのpresence:trueにより、True/Falseの評価
     if @post.save
       flash[:notice]="書籍を追加しました"
