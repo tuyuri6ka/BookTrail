@@ -9,7 +9,7 @@
         <p><%= @user.email %></p>
 
         <% if @current_user.id == @user.id %>
-          <%= link_to("編集", "/users/#{@user.id}/edit") %>
+          <%= link_to　"編集", "/users/#{@user.id}/edit" %>
         <% end %>
       </div>
       <div class ="user-show-btn">

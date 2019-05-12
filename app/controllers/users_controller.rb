@@ -96,17 +96,15 @@ class UsersController < ApplicationController
     @table_id = 0
   end
 
-
   private
     #strong_parameterの実装
     def user_params
       params.require(:user).permit(:name, :email, :password)
     end
-
     
     def correct_user
       @user = User.find(params[:id])
-      if @current_user.id != @user
+      if @current_user.id != @user.id
         flash[:notice]="権限がありません"
         redirect_to("/posts/index")
       end
