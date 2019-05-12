@@ -76,9 +76,9 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(email: params[:email])
+    @user = User.find_by(email: params[:user][:email])
     
-    if @user && @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       flash[:notice] ="ようこそ"
       #Remember_me機能（ユーザーセッションの永続化）の実装のため
@@ -88,9 +88,6 @@ class UsersController < ApplicationController
 
       redirect_to("/users/#{@user.id}")
     else
-      #メモ:入力ミス時のフォーム再表示に利用するため
-      @email = params[:email]
-      @password = params[:password]
       @error_message="アドレスまたはパスワードが間違っています"
       flash.now[:notice] = "入力内容に誤りがあります"
       render("/users/login_form")

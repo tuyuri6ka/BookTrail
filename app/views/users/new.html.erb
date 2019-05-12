@@ -8,15 +8,15 @@
       <!-- 入力ミスがあった場合に、エラーを表示 -->
       <%= render "shared/signup_error_messages" %>
 
-        <%= form_for @user  do |f| %>
-            <p>ユーザー名</p>
-            <%= f.text_field :name %>
-            <p>メールアドレス</p>
-            <%= f.email_field :email %>
-            <p>パスワード</p>
-            <%= f.password_field :password %>
-            <input type="submit" value="新規登録">
-        <% end %>
+      <%= form_for @user  do |f| %>
+        <p>ユーザー名</p>
+        <%= f.text_field :name %>
+        <p>メールアドレス</p>
+        <%= f.email_field :email %>
+        <p>パスワード</p>
+        <%= f.password_field :password %>
+        <input type="submit" value="新規登録">
+      <% end %>
 
       </div>
     </div>

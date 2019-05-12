@@ -2,24 +2,24 @@
 <div class="main users-new">
   <div class="container">
     <div class="form-heading">ログイン</div>
-    <div class="form users-form">
-      <div class="form-body">
+      <div class="form users-form">
+        <div class="form-body">
 
-        <!-- 入力ミスがあった場合に、エラーを表示 -->
-        <%= render "shared/login_error_messages" %>
+          <!-- 入力ミスがあった場合に、エラーを表示 -->
+          <%= render "shared/login_error_messages" %>
 
-        <%= form_tag("/login") do %>
-            <p>メールアドレス</p>
-            <input name ="email" value ="<%= @email %>">
-            <p>パスワード</p>
-            <input type="password" name="password" value="<%= @password %>">
-            
-            <label for="checkbox">
-            <input type="checkbox" name="remember_me" id="checkbox" value="1">ログインしたままにする
-            </label>
+          <%= form_for(:user, url:login_path) do |f| %>
+              <p>メールアドレス</p>
+              <%= f.email_field :email %>
+              <p>パスワード</p>
+              <%= f.password_field :password %>
+              
+              <label for="checkbox">
+              <input type="checkbox" name="remember_me" id="checkbox" value="1">ログインしたままにする
+              </label>
 
-            <input type="submit" value="ログイン">
-        <% end %>
+              <%= f.submit "ログイン" %>
+          <% end %>
 
         </div>
     </div>
