@@ -6,11 +6,7 @@
       <div class="form-body">
 
         <!-- 入力ミスがあった場合に、エラーを表示 -->
-        <% if @error_message %>
-            <div class="form-error">
-            <%= @error_message %>
-            </div>
-        <% end %>
+        <%= render "shared/login_error_messages" %>
 
         <%= form_tag("/login") do %>
             <p>メールアドレス</p>
