@@ -39,21 +39,20 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id]= @user.id
+      log_in @user
       flash[:notice]="ようこそ"
       redirect_to @user   # redirect_to("/users/#{@user.id}")に同じ
     else
-      flash.now[:notice]="入力内容に誤りがあります"
-      render　"new"       # render("/users/new")に同じ
+      render "new"       # render("/users/new")に同じ
     end
   end
 
   def update
-    @user = User.find_by(id: params[:id])
-    @user.name = params[:name]
-    @user.email = params[:email]
+    @user = User.find(params[:id])
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
     #メモ：image.readで画像を抽出し、Flie.binwriter()でpublic内に保存
-    if image = params[:image]
+    if image = params[:user][:image]
       @user.image_name= "#{@user.id}.jpg"
       File.binwrite("public/user_images/#{@user.image_name}",image.read)
     end
@@ -63,7 +62,7 @@ class UsersController < ApplicationController
       redirect_to("/users/#{@user.id}")
     else
       flash.now[:notice]="入力内容に誤りがあります"
-      render("users/edit")
+      render "edit"
     end
   end
 
