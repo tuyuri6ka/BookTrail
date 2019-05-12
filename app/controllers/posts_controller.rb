@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  belongs_to :user
 
   #before_action----------------------------------------------
   #他ユーザー（/users/:id/edit）への編集制限
