@@ -20,4 +20,11 @@
           <li><%= link_to("ログイン","/login") %></li>
         <% end %>
       </ul>
+
+      <!-- メッセージ用フラッシュ　-->
+      <% if flash[:notice] %>
+        <div class = "flash">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
 </header>

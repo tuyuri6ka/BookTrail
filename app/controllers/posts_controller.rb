@@ -38,7 +38,7 @@ class PostsController < ApplicationController
       flash[:notice]="書籍を追加しました"
       redirect_to("/posts/index")
     else
-      flash.now[:notice]="入力内容に誤りがあります"       #flash.nowはアクションが進まないときに利用
+      flash.now[:notice]="入力内容に誤りがあります"
       render("/posts/new")
     end
   end
@@ -96,7 +96,7 @@ class PostsController < ApplicationController
     #他ユーザー（/users/:id/edit）への編集制限
     def correct_user
       @post = Post.find_by(id: params[:id])
-      if @post.user_id != @current_user
+      if @current_user.id != @post.user_id
         flash[:notice]= "権限がありません"
         redirect_to("/posts/index")
       end

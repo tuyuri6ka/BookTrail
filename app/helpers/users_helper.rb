@@ -29,7 +29,7 @@ module UsersHelper
     # 現在のユーザーをログアウトする
     def log_out
         forget(set_current_user)
-        session[:user_id] = nil
+        session.delete(:user_id)
         @current_user = nil
     end
     

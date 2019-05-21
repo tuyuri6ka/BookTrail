@@ -61,6 +61,12 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'rails-controller-testing'          #testができないため追加
+  gem 'minitest-reporters',   '1.1.14'    #testができないため追加
+  gem 'guard',                '2.13.0'    #testができないため追加
+  gem 'guard-minitest',       '2.4.4'     #testができないため追加
+  gem 'minitest', '~> 5.10',  '!= 5.10.2' #testができないため追加
+  
   gem 'chromedriver-helper'
 end
 
